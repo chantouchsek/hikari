@@ -1,1 +1,23 @@
 // Here you can add other styles
+.content-image {
+  width: 120px;
+  height: 120px;
+  border: 1px solid gray;
+  text-align: center;
+  vertical-align: middle;
+  position: relative;
+  display: table-cell;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  background-size: cover
+}
+
+.top-section {
+  margin-bottom: 50px;
+}
+
+.custom-font {
+  font-size: 50px;
+  background: transparent;
+  color: white;
+}

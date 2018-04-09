@@ -20,7 +20,7 @@ class StoreTransformer extends BaseTransformer
       'name' => (string)$item->name,
       'address' => (string)$item->address,
       'status' => (boolean)$item->status,
-      'registered' => $item->created_at
+      'registered' => $item->created_at->toDateString()
     ];
   }
 }

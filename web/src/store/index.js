@@ -16,6 +16,14 @@ import user from './modules/user'
 import artist from './modules/artist'
 import application from './modules/application'
 import store from './modules/store'
+import timecard from './modules/timecard'
+import quest from './modules/quest'
+import branch from './modules/branch'
+import attendance from './modules/attendance'
+import dailyreport from './modules/dailyreport'
+import post from './modules/post'
+import draftpost from './modules/draftpost'
+import chat from './modules/chat'
 
 Vue.use(Vuex)
 
@@ -30,7 +38,15 @@ export default new Vuex.Store({
     user,
     application,
     artist,
-    store
+    store,
+    timecard,
+    quest,
+    branch,
+    attendance,
+    dailyreport,
+    post,
+    draftpost,
+    chat
   },
 
   /**

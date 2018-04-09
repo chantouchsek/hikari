@@ -89,6 +89,7 @@ class BaseProxy {
           if (response) {
             reject(response.data)
           } else {
+            console.log(response)
             reject(new Error('Something went wrong! Please check your connection.'))
             store.dispatch('application/addAlert', {
               type: 'danger',

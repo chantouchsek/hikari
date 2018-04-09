@@ -267,10 +267,12 @@
         if (state.auth.authenticated) {
           this.$store.dispatch('store/all')
           this.$echo
-            .channel('artist')
+            .channel('store')
             .listen('Store.Created', store => this.$store.dispatch('store/created', store))
-            // .listen('Artist.Updated', artist => store.dispatch('artist/updated', artist))
-            // .listen('Artist.Deleted', artist => store.dispatch('artist/destroyed', artist));
+            .listen('Store.Updated', (store) => {
+              this.$store.dispatch('store/updated', store)
+            })
+            .listen('Store.Deleted', store => this.$store.dispatch('store/destroyed', store))
         }
       })
     }

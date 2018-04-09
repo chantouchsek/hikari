@@ -56,10 +56,42 @@ import Page500 from '@/views/pages/Page500'
 import Login from '@/views/login/Login'
 import Register from '@/views/pages/Register'
 
-import Users from '@/views/settings/users/Index'
+import StaffsIndex from '@/views/staffs/Index'
+import StaffsEdit from '@/views/staffs/Edit'
+import StaffsCreate from '@/views/staffs/Create'
+
 import StoresIndex from '@/views/stores/Index'
 import StoresEdit from '@/views/stores/Edit'
 import StoresCreate from '@/views/stores/Create'
+
+import TimeCardsIndex from '@/views/timecards/Index'
+import TimeCardsEdit from '@/views/timecards/Edit'
+import TimeCardsCreate from '@/views/timecards/Create'
+
+import QuestsIndex from '@/views/quests/Index'
+import QuestsEdit from '@/views/quests/Edit'
+import QuestsCreate from '@/views/quests/Create'
+
+import BranchIndex from '@/views/branches/Index'
+import BranchEdit from '@/views/branches/Edit'
+import BranchCreate from '@/views/branches/Create'
+
+import AttendancesIndex from '@/views/attendances/Index'
+import AttendancesEdit from '@/views/attendances/Edit'
+import AttendancesShow from '@/views/attendances/Show'
+import AttendancesCreate from '@/views/attendances/Create'
+
+import DailyReportIndex from '@/views/dailyreports/Index'
+import DailyReportShow from '@/views/dailyreports/Show'
+import DailyReportEdit from '@/views/dailyreports/Edit'
+import DailyReportCreate from '@/views/dailyreports/Create'
+
+import SchedulePostIndex from '@/views/scheduleposts/Index'
+import SchedulePostEdit from '@/views/scheduleposts/Edit'
+import SchedulePostCreate from '@/views/scheduleposts/Create'
+import DraftPostIndex from '@/views/scheduleposts/DraftPost'
+
+import ChatIndex from '@/views/chats/Index'
 
 export default [
   {
@@ -75,9 +107,9 @@ export default [
         component: Dashboard
       },
       {
-        path: '/setting',
-        redirect: '/setting',
-        name: 'Settings',
+        path: '/staffs',
+        redirect: '/staffs',
+        name: 'Staff',
         component: {
           render (c) {
             return c('router-view')
@@ -85,9 +117,20 @@ export default [
         },
         children: [
           {
-            path: '/setting/users',
-            name: 'Users',
-            component: Users
+            path: '/staffs',
+            name: 'staffs.index',
+            component: StaffsIndex
+          },
+          {
+            path: '/staffs/:staffId/edit',
+            name: 'staffs.show',
+            component: StaffsEdit,
+            props: true
+          },
+          {
+            path: '/staffs/create',
+            name: 'staffs.create',
+            component: StaffsCreate
           }
         ]
       },
@@ -114,8 +157,210 @@ export default [
           },
           {
             path: '/stores/create',
-            name: 'Create',
+            name: 'stores.create',
             component: StoresCreate
+          }
+        ]
+      },
+      {
+        path: '/time_cards',
+        redirect: '/time_cards',
+        name: 'Time Cards',
+        component: {
+          render (c) {
+            return c('router-view')
+          }
+        },
+        children: [
+          {
+            path: '/time_cards',
+            name: 'time_cards.index',
+            component: TimeCardsIndex
+          },
+          {
+            path: '/time_cards/:cardId/edit',
+            name: 'time_cards.show',
+            component: TimeCardsEdit,
+            props: true
+          },
+          {
+            path: '/time_cards/create',
+            name: 'time_cards.create',
+            component: TimeCardsCreate
+          }
+        ]
+      },
+      {
+        path: '/quests',
+        redirect: '/quests',
+        name: 'Quests',
+        component: {
+          render (c) {
+            return c('router-view')
+          }
+        },
+        children: [
+          {
+            path: '/quests',
+            name: 'quests.index',
+            component: QuestsIndex
+          },
+          {
+            path: '/quests/:questId/edit',
+            name: 'quests.show',
+            component: QuestsEdit,
+            props: true
+          },
+          {
+            path: '/quests/create',
+            name: 'quests.create',
+            component: QuestsCreate
+          }
+        ]
+      },
+      {
+        path: '/branches',
+        redirect: '/branches',
+        name: 'Branches',
+        component: {
+          render (c) {
+            return c('router-view')
+          }
+        },
+        children: [
+          {
+            path: '/branches',
+            name: 'branches.index',
+            component: BranchIndex
+          },
+          {
+            path: '/branches/:branchId/edit',
+            name: 'branches.show',
+            component: BranchEdit,
+            props: true
+          },
+          {
+            path: '/branches/create',
+            name: 'branches.create',
+            component: BranchCreate
+          }
+        ]
+      },
+      {
+        path: '/attendances',
+        redirect: '/attendances',
+        name: 'Attendance',
+        component: {
+          render (c) {
+            return c('router-view')
+          }
+        },
+        children: [
+          {
+            path: '/attendances',
+            name: 'attendances.index',
+            component: AttendancesIndex
+          },
+          {
+            path: '/attendances/:attendanceId',
+            name: 'attendances.show',
+            component: AttendancesShow,
+            props: true
+          },
+          {
+            path: '/attendances/:attendanceId/edit',
+            name: 'attendances.edit',
+            component: AttendancesEdit,
+            props: true
+          },
+          {
+            path: '/attendances/create',
+            name: 'attendances.create',
+            component: AttendancesCreate
+          }
+        ]
+      },
+      {
+        path: '/dailyreports',
+        redirect: '/dailyreports',
+        name: 'Daily Reports',
+        component: {
+          render (c) {
+            return c('router-view')
+          }
+        },
+        children: [
+          {
+            path: '/dailyreports',
+            name: 'dailyreports.index',
+            component: DailyReportIndex
+          },
+          {
+            path: '/dailyreports/:dailyreportId',
+            name: 'dailyreports.show',
+            component: DailyReportShow,
+            props: true
+          },
+          {
+            path: '/dailyreports/:dailyreportId/edit',
+            name: 'dailyreports.edit',
+            component: DailyReportEdit,
+            props: true
+          },
+          {
+            path: '/dailyreports/create',
+            name: 'dailyreports.create',
+            component: DailyReportCreate
+          }
+        ]
+      },
+      {
+        path: '/posts',
+        redirect: '/posts/schedule',
+        name: 'Posts',
+        component: {
+          render (c) {
+            return c('router-view')
+          }
+        },
+        children: [
+          {
+            path: '/posts/schedule',
+            name: 'schedule.index',
+            component: SchedulePostIndex
+          },
+          {
+            path: '/posts/schedule/:scheduleId/edit',
+            name: 'schedule.edit',
+            component: SchedulePostEdit,
+            props: true
+          },
+          {
+            path: '/posts/create',
+            name: 'posts.create',
+            component: SchedulePostCreate
+          },
+          {
+            path: '/posts/draft',
+            name: 'draft.index',
+            component: DraftPostIndex
+          }
+        ]
+      },
+      {
+        path: 'chats',
+        redirect: 'features/chats',
+        name: 'Features',
+        component: {
+          render (c) {
+            return c('router-view')
+          }
+        },
+        children: [
+          {
+            path: '/chats',
+            name: 'Chats',
+            component: ChatIndex
           }
         ]
       },

@@ -34,6 +34,7 @@ import BootstrapVue from 'bootstrap-vue'
 
 import Echo from 'laravel-echo'
 import Pusher from 'pusher-js'
+import VueCarousel from 'vue-carousel'
 
 /* ============
  * Vuex Router Sync
@@ -45,6 +46,12 @@ import Pusher from 'pusher-js'
  */
 import { sync } from 'vuex-router-sync'
 import store from '@/store'
+
+/* ============
+* DateTimePicker Global register
+** ============
+ */
+import datePicker from 'vue-bootstrap-datetimepicker'
 
 Vue.config.debug = process.env.NODE_ENV !== 'production'
 
@@ -85,6 +92,9 @@ Object.defineProperty(Vue.prototype, '$echo', {
     return echo
   }
 })
+
+Vue.use(datePicker)
+Vue.use(VueCarousel)
 
 store.dispatch('auth/check')
 

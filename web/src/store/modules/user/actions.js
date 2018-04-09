@@ -53,7 +53,7 @@ const create = ({ commit }, user) => {
       })
 
       Vue.router.push({
-        name: 'users.index'
+        name: 'staffs.index'
       })
     })
     .catch(() => {
@@ -91,7 +91,7 @@ const update = ({ commit }, user) => {
       })
 
       Vue.router.push({
-        name: 'users.show',
+        name: 'staffs.index',
         params: {
           userId: user.id
         }
@@ -130,7 +130,7 @@ const destroy = ({ commit }, userId) => {
       })
 
       Vue.router.push({
-        name: 'users.index'
+        name: 'staffs.index'
       })
     })
     .catch(() => {
