@@ -1,3 +1,4 @@
+// Main file for left menu
 export default {
   items: [
     {
