@@ -12,96 +12,96 @@ use Illuminate\Support\Facades\Input;
 
 class AttendanceController extends Controller
 {
-  /**
-   * @var AttendanceTransformer The transformer used to transform the model.
-   */
-  protected $transformer;
+    /**
+     * @var AttendanceTransformer The transformer used to transform the model.
+     */
+    protected $transformer;
 
-  /**
-   * UsersController constructor.
-   * @param AttendanceTransformer $transformer The transformer used to transform the model
-   */
-  public function __construct(AttendanceTransformer $transformer)
-  {
-    $this->transformer = $transformer;
-  }
-
-  /**
-   * Display a listing of the resource.
-   *
-   * @return \Illuminate\Http\JsonResponse
-   */
-  public function index(): JsonResponse
-  {
-    if (Input::get('limit')) {
-      $this->setPagination(Input::get('limit'));
+    /**
+     * UsersController constructor.
+     * @param AttendanceTransformer $transformer The transformer used to transform the model
+     */
+    public function __construct(AttendanceTransformer $transformer)
+    {
+        $this->transformer = $transformer;
     }
 
-    $pagination = Attendance::with('user:id,name')->paginate($this->getPagination());
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function index(): JsonResponse
+    {
+        if (Input::get('limit')) {
+            $this->setPagination(Input::get('limit'));
+        }
 
-    $data = $this->transformer->transformCollection(collect($pagination->items()));
+        $pagination = Attendance::with('user:id,name')->paginate($this->getPagination());
 
-    return $this->respondWithPagination($pagination, [
-      'data' => $data
-    ]);
-  }
+        $data = $this->transformer->transformCollection(collect($pagination->items()));
 
-  /**
-   * Store a newly created resource in storage.
-   *
-   * @param  StoreRequest $request
-   * @return \Illuminate\Http\JsonResponse
-   */
-  public function store(StoreRequest $request)
-  {
-    $attendance = new Attendance($request->all());
-    //$attendance->reported_at = new Carbon($request->get('reported_at'));
-    $attendance->save();
+        return $this->respondWithPagination($pagination, [
+            'data' => $data
+        ]);
+    }
 
-    return $this->respondCreated('The attendance has been updated.');
-  }
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  StoreRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function store(StoreRequest $request)
+    {
+        $attendance = new Attendance($request->all());
+        //$attendance->reported_at = new Carbon($request->get('reported_at'));
+        $attendance->save();
 
-  /**
-   * Display the specified resource.
-   *
-   * @param  \App\Models\Attendance $attendance
-   * @return \Illuminate\Http\JsonResponse
-   */
-  public function show(Attendance $attendance)
-  {
-    return $this->respond($this->transformer->transform($attendance));
-  }
+        return $this->respondCreated('The attendance has been updated.');
+    }
 
-  /**
-   * Update the specified resource in storage.
-   *
-   * @param  UpdateRequest $request
-   * @param  \App\Models\Attendance $attendance
-   * @return \Illuminate\Http\JsonResponse
-   */
-  public function update(UpdateRequest $request, Attendance $attendance)
-  {
-    $attendance->fill($request->except(['start_time', 'leave_time', 'break_start', 'break_finish']));
-    $attendance->start_time = new Carbon($request->get('start_time'));
-    $attendance->leave_time = new Carbon($request->get('leave_time'));
-    $attendance->break_start = new Carbon($request->get('break_start'));
-    $attendance->break_finish = new Carbon($request->get('break_finish'));
-    $attendance->save();
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Attendance $attendance
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function show(Attendance $attendance)
+    {
+        return $this->respond($this->transformer->transform($attendance));
+    }
 
-    return $this->respondCreated('The attendance has been updated.');
-  }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  UpdateRequest $request
+     * @param  \App\Models\Attendance $attendance
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function update(UpdateRequest $request, Attendance $attendance)
+    {
+        $attendance->fill($request->except(['start_time', 'leave_time', 'break_start', 'break_finish']));
+        $attendance->start_time = new Carbon($request->get('start_time'));
+        $attendance->leave_time = new Carbon($request->get('leave_time'));
+        $attendance->break_start = new Carbon($request->get('break_start'));
+        $attendance->break_finish = new Carbon($request->get('break_finish'));
+        $attendance->save();
 
-  /**
-   * Remove the specified resource from storage.
-   *
-   * @param  \App\Models\Attendance $attendance
-   * @return \Illuminate\Http\JsonResponse
-   * @throws \Exception
-   */
-  public function destroy(Attendance $attendance)
-  {
-    $attendance->delete();
+        return $this->respondCreated('The attendance has been updated.');
+    }
 
-    return $this->respondWithSuccess('The attendance has been deleted.');
-  }
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Attendance $attendance
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
+    public function destroy(Attendance $attendance)
+    {
+        $attendance->delete();
+
+        return $this->respondWithSuccess('The attendance has been deleted.');
+    }
 }

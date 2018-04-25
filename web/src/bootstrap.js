@@ -46,6 +46,7 @@ import VueCarousel from 'vue-carousel'
  */
 import { sync } from 'vuex-router-sync'
 import store from '@/store'
+import VueImg from 'v-img'
 
 /* ============
 * DateTimePicker Global register
@@ -95,8 +96,7 @@ Object.defineProperty(Vue.prototype, '$echo', {
 
 Vue.use(datePicker)
 Vue.use(VueCarousel)
-
-store.dispatch('auth/check')
+Vue.use(VueImg)
 
 /* ===============
 * Vues Router
@@ -123,6 +123,10 @@ export const router = new VueRouter({
 })
 
 store.dispatch('auth/check')
+
+if (store.state.auth.authenticated) {
+  store.dispatch('auth/getAuth')
+}
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(m => m.meta.auth) && !store.state.auth.authenticated) {

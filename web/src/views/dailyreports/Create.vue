@@ -14,30 +14,30 @@
                               label-for="branchId">
                   <v-select v-model="branch.selected" @search="fetchBranches" :options="branch.items"></v-select>
                 </b-form-group>
-                <b-form-group id="labelTotalPrice"
-                              label="Total Price:"
+                <b-form-group id="labelSale"
+                              label="Sales:"
                               label-for="TotalPrice">
-                  <b-form-input id="TotalPrice"
+                  <b-form-input id="sales"
                                 type="text"
-                                v-model="dailyreport.totalPrice"
-                                placeholder="Enter the report total price">
+                                v-model="dailyreport.sales"
+                                placeholder="Enter the report sales">
                   </b-form-input>
                 </b-form-group>
-                <b-form-group id="labelNumberCustomers"
-                              label="Number Customers:"
-                              label-for="NumberCustomers">
-                  <b-form-input id="NumberCustomers"
+                <b-form-group id="labelTotalGuest"
+                              label="Total Guest:"
+                              label-for="TotalGuest">
+                  <b-form-input id="TotalGuest"
                                 type="text"
-                                v-model="dailyreport.numberCustomers"
+                                v-model="dailyreport.totalGuest"
                                 placeholder="Enter the report number customers">
                   </b-form-input>
                 </b-form-group>
-                <b-form-group id="labelPricePerCustomer"
-                              label="Price/Customer:"
-                              label-for="PricePerCustomer">
-                  <b-form-input id="PricePerCustomer"
+                <b-form-group id="labelUnitSale"
+                              label="Unit Sale:"
+                              label-for="UnitSale">
+                  <b-form-input id="UnitSale"
                                 type="text"
-                                v-model="dailyreport.pricePerCustomer"
+                                v-model="dailyreport.unitSale"
                                 required
                                 placeholder="Enter price/customer">
                   </b-form-input>
@@ -85,13 +85,13 @@
                                  :options="this.$store.state.application.customerType"
                   ></b-form-select>
                 </b-form-group>
-                <b-form-group id="labelRoughInterest"
-                              label="Rough interest:"
-                              label-for="RoughInterest">
-                  <b-form-input id="RoughInterest"
+                <b-form-group id="labelCrossProfit"
+                              label="Cross Profit:"
+                              label-for="CrossProfit">
+                  <b-form-input id="CrossProfit"
                                 type="text"
-                                v-model="dailyreport.roughInterest"
-                                placeholder="Enter the report rough interest">
+                                v-model="dailyreport.crossProfit"
+                                placeholder="Enter the report cross profit">
                   </b-form-input>
                 </b-form-group>
                 <b-form-group id="labelQuestB"
@@ -105,15 +105,15 @@
                 </b-form-group>
               </b-col>
             </b-row>
-            <b-form-group id="labelNotes"
-                          label="Notes:"
-                          label-for="notes">
-              <b-form-textarea id="notes"
+            <b-form-group id="labelComments"
+                          label="Comments:"
+                          label-for="comments">
+              <b-form-textarea id="comments"
                                type="text"
                                rows="5"
                                max-rows="10"
-                               v-model="dailyreport.notes"
-                               placeholder="Enter the report notes">
+                               v-model="dailyreport.comments"
+                               placeholder="Enter the report comments">
               </b-form-textarea>
             </b-form-group>
           </b-card-body>

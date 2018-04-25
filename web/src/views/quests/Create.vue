@@ -17,34 +17,59 @@
                             placeholder="Enter quest name">
               </b-form-input>
             </b-form-group>
-            <!--<b-form-group id="labelStore"-->
-            <!--label="Store:"-->
-            <!--label-for="store">-->
-            <!--<v-select @search="fetchStores" v-model="store.selected" :options="store.items"></v-select>-->
-            <!--</b-form-group>-->
-            <b-form-group id="labelUser"
-                          label="Staff ID:"
-                          label-for="user">
-              <v-select v-model="user.selected" @search="fetchUsers" :options="user.items"></v-select>
-            </b-form-group>
             <b-form-group id="labelQuestType"
                           label="Quest Type:"
                           label-for="quest_type">
               <b-form-select v-model="quest.questType"
-                             :options="options"
+                             :options="questType"
                              class="mb-3"
                              id="quest_type"
               ></b-form-select>
             </b-form-group>
-            <b-form-group id="labelDateTerm"
-                          label="Date Term:"
-                          label-for="date_term">
-              <b-form-input id="date_term"
-                            type="text"
-                            v-model="quest.dateTerm"
-                            required
-                            placeholder="Enter staff date term">
-              </b-form-input>
+            <b-form-group id="labelUser"
+                          label="Staff ID:"
+                          label-for="user">
+              <treeselect
+                :multiple="true"
+                :options="user.items"
+                search-nested
+                value-consists-of="LEAF_PRIORITY"
+                v-model="user.selected"
+              />
+            </b-form-group>
+            <b-row>
+              <b-col md="6">
+                <b-form-group id="labelStartDate"
+                              label="Start Date:"
+                              label-for="start_date">
+                  <b-form-input id="start_date"
+                                type="text"
+                                v-model="quest.dateTerm"
+                  >
+                  </b-form-input>
+                </b-form-group>
+              </b-col>
+              <b-col md="6">
+                <b-form-group id="labelEndDate"
+                              label="End Date:"
+                              label-for="end_date">
+                  <b-form-input id="end_date"
+                                type="text"
+                                v-model="quest.dateTerm"
+                  >
+                  </b-form-input>
+                </b-form-group>
+              </b-col>
+            </b-row>
+            <b-form-group id="labelDescription"
+                          label="Description:"
+                          label-for="user">
+              <b-form-textarea id="description"
+                               v-model="quest.description"
+                               placeholder="Enter something"
+                               :rows="10"
+                               :max-rows="15">
+              </b-form-textarea>
             </b-form-group>
             <b-form-group id="labelStatus"
                           label="Status:"
@@ -53,7 +78,7 @@
                                v-model="quest.status"
                                value="1"
                                unchecked-value="0">
-                Status
+                Active
               </b-form-checkbox>
             </b-form-group>
             <b-button type="submit" variant="primary">Submit</b-button>
@@ -67,9 +92,11 @@
 </template>
 
 <script>
+  import '@riophae/vue-treeselect/dist/vue-treeselect.min.css'
   import Proxy from '@/proxies/UserProxy'
   import debounce from 'lodash.debounce'
   import VSelect from 'vue-select'
+  import Treeselect from '@riophae/vue-treeselect'
 
   const proxy = new Proxy()
 
@@ -77,12 +104,7 @@
     name: 'quest-create',
     data () {
       return {
-        quest: {
-          status: null,
-          questType: null,
-          userId: null,
-          name: null
-        },
+        quest: {},
         user: {
           items: [],
           selected: null
@@ -92,12 +114,10 @@
           selected: null
         },
         show: true,
-        options: [
-          { value: null, text: 'Please select some item' },
-          { value: '0', text: 'Quest Type 1' },
-          { value: '1', text: 'Quest Type 2' },
-          { value: '2', text: 'Quest Type 3' },
-          { value: '3', text: 'Quest Type 4' }
+        questType: [
+          { value: '', text: 'Please select some item' },
+          { value: '0', text: 'Number quest' },
+          { value: '1', text: 'Action quest' }
         ]
       }
     },
@@ -136,7 +156,8 @@
           .then((items) => {
             this.user.items = items.data.map(user => ({
               id: user.id,
-              label: user.name
+              label: user.name,
+              children: []
             }))
           })
       }, 500),
@@ -151,7 +172,8 @@
       }
     },
     components: {
-      VSelect
+      VSelect,
+      Treeselect
     }
   }
 </script>

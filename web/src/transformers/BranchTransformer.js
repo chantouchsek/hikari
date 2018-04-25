@@ -6,16 +6,16 @@
  */
 
 import Transformer from './BaseTransformer'
-import Quest from '@/models/Branch'
+import Branch from '@/models/Branch'
 
 class BranchTransformer extends Transformer {
   /**
    * Method used to transform a fetched branch.
    *
-   * @returns {Quest} a branch model.
+   * @returns {Branch} a branch model.
    */
   static fetch (branch) {
-    return new Quest({
+    return new Branch({
       id: branch.id,
       name: branch.name,
       superUserDailyReportTemplate: branch.super_user_daily_report_template,

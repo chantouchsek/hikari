@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -23,7 +24,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'birth_date', 'store_id', 'hourly_wage', 'staff_id'
+        'name', 'email', 'password', 'birth_date', 'branch_id', 'hourly_rate', 'staff_id'
     ];
 
     protected $dates = [
@@ -51,14 +52,6 @@ class User extends Authenticatable
     }
 
     /**
-     * @return BelongsTo
-     */
-    public function store(): BelongsTo
-    {
-        return $this->belongsTo(Store::class);
-    }
-
-    /**
      * @return HasMany
      */
     public function timeCard(): HasMany
@@ -80,5 +73,21 @@ class User extends Authenticatable
     public function attendances(): HasMany
     {
         return $this->hasMany(Attendance::class);
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function channels(): BelongsToMany
+    {
+        return $this->belongsToMany(Channel::class)->withTimestamps();
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function branch(): BelongsTo
+    {
+        return $this->belongsTo(Branch::class);
     }
 }

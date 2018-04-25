@@ -51,7 +51,6 @@
                 :sort-desc.sync="sortDesc"
                 @filtered="onFiltered"
                 :filter="query"
-                :busy="true"
               >
                 <template slot-scope="row" slot="branch">
                   {{ row.item.branch ? row.item.branch.name : null }}

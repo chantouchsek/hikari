@@ -20,9 +20,9 @@ class UserTransformer extends Transformer {
       name: user.name,
       staffId: user.staff_id,
       birthDate: user.birth_date,
-      store: user.store,
-      storeId: user.store_id,
-      hourlyWage: user.hourly_wage
+      branch: user.branch,
+      branchId: user.branch_id,
+      hourlyRate: user.hourly_rate
     })
   }
 
@@ -36,8 +36,8 @@ class UserTransformer extends Transformer {
       id: user.id,
       name: user.name,
       staff_id: user.staffId,
-      store_id: user.storeId,
-      hourly_wage: user.hourlyWage
+      branch_id: user.branchId,
+      hourly_rate: user.hourlyRate
     }
   }
 }

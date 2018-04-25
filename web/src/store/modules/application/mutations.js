@@ -10,7 +10,9 @@ import {
   REMOVE_ALERT,
   TOGGLE_DRAWER,
   SHOW_DRAWER,
-  HIDE_DRAWER
+  HIDE_DRAWER,
+  DISABLED_CHAT,
+  ENABLED_CHAT
 } from './mutation-types'
 
 export default {
@@ -61,5 +63,13 @@ export default {
     state.alerts = state
       .alerts
       .filter(item => item !== alert)
+  },
+
+  [DISABLED_CHAT] (state) {
+    state.isJoined = false
+  },
+
+  [ENABLED_CHAT] (state) {
+    state.isJoined = true
   }
 }

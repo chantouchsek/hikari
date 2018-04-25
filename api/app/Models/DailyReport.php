@@ -14,16 +14,15 @@ class DailyReport extends Model
     protected $fillable = [
         'user_id',
         'sales',
-        'number_customers',
-        'customer_type',
+        'total_guest',
+        'guest_type',
         'cost',
         'quest_a',
         'quest_b',
-        'notes',
-        'total_price',
-        'rough_interest',
-        'price_per_customer',
-        'thumbnail_id',
+        'quest_c',
+        'comments',
+        'unit_sale',
+        'cross_profit',
         'branch_id',
         'date'
     ];

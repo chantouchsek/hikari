@@ -119,9 +119,10 @@
       return {
         fields: [
           { key: 'name', label: 'Name', sortable: true },
-          { key: 'questType', label: 'Quest type', sortable: true },
-          { key: 'user', label: 'User Name', sortable: true },
-          { key: 'store', label: 'Store', sortable: true },
+          { key: 'description', label: 'Description', sortable: true },
+          { key: 'start_date', label: 'Start Date', sortable: true },
+          { key: 'end_date', label: 'End Date', sortable: true },
+          { key: 'status', label: 'Status', sortable: true },
           { key: 'actions', label: 'Actions' }
         ],
         query: null,

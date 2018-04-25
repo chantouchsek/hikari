@@ -14,23 +14,26 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/user', function (Request $request) {
-  return $request->user();
+    return $request->user();
 });
 
+//User accept the invitation of joining channel
+Route::get('accept/{channel}/{token}', 'InviteController@accept')->name('accept');
+
 Route::group([
-  'as' => 'user.',
-  'prefix' => 'users',
+    'as' => 'user.',
+    'prefix' => 'users',
 ], function () {
-  Route::get('', ['as' => 'index', 'uses' => 'UsersController@index']);
-  Route::post('', ['as' => 'store', 'uses' => 'UsersController@store']);
-  Route::get('{user}', ['as' => 'show', 'uses' => 'UsersController@show']);
-  Route::put('{user}', ['as' => 'update', 'uses' => 'UsersController@update']);
-  Route::delete('{user}', ['as' => 'destroy', 'uses' => 'UsersController@destroy']);
-  Route::get('{user}/store', ['as' => 'store.show', 'uses' => 'Users\StoreController@show']);
+    Route::get('', ['as' => 'index', 'uses' => 'UsersController@index']);
+    Route::post('', ['as' => 'store', 'uses' => 'UsersController@store']);
+    Route::get('{user}', ['as' => 'show', 'uses' => 'UsersController@show']);
+    Route::put('{user}', ['as' => 'update', 'uses' => 'UsersController@update']);
+    Route::delete('{user}', ['as' => 'destroy', 'uses' => 'UsersController@destroy']);
+    Route::get('{user}/store', ['as' => 'store.show', 'uses' => 'Users\StoreController@show']);
 });
 
 Route::prefix('departments')->as('departments.')->group(function () { // ->namespace('Users')->middleware(['auth:api'])
-  Route::get('', 'DepartmentsController@index')->name('index');
+    Route::get('', 'DepartmentsController@index')->name('index');
 });
 
 Route::get('stores/all', 'Store\StoreController@index');
@@ -50,3 +53,16 @@ Route::get('posts/drafts', 'PostController@draftPost');
 Route::delete('posts/drafts/{post}', 'PostController@destroy');
 Route::resource('posts', 'PostController');
 Route::resource('chats', 'ChatMessageController');
+
+Route::resource('groups', 'GroupController');
+Route::get('channels/{channel}/conversations', 'Channel\ConversationsController@show');
+Route::patch('channels/{channel}/users', 'Channel\UsersController@update');
+Route::get('channels/{channel}/users', 'Channel\UsersController@show');
+Route::get('channels/{channel}/group', 'Channel\GroupController@show');
+Route::resource('channels', 'ChannelController');
+
+Route::post('conversations/{conversation}/likes', 'ConversationLikesController@store')->name('conversations.likes.store');
+Route::delete('conversations/{conversation}/likes', 'ConversationLikesController@destroy')->name('conversations.likes.destroy');
+
+Route::resource('conversations', 'ConversationController');
+Route::resource('alarms', 'AlarmController');

@@ -19,8 +19,10 @@ class ChatMessageTransformer extends BaseTransformer
             'id' => (int)$item->id,
             'message' => (string)$item->message,
             'user' => $item->user,
-            'thumbnail' => $item->hasThumbnail() ? route('media.show', $item->thumbnail()->filename) : null,
-            'sent_at' => $item->created_at->toDateString()
+            'sent_at' => $item->created_at->toDateString(),
+            'likes' => $item->likes,
+            'isLiked' => $item->isLiked(),
+            'media' => $item->media
         ];
     }
 }

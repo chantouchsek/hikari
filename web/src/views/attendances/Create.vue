@@ -5,7 +5,7 @@
         <div slot="header">
           <i class="fa fa-edit"></i> Attendance Create
         </div>
-        <b-form @submit.prevent="createBranch" @reset="onReset" v-if="show">
+        <b-form @submit.prevent="createAttendance" @reset="onReset" v-if="show">
           <b-card-body>
             <b-row>
               <b-col lg="5">
@@ -284,7 +284,7 @@
        * Method to create a new attendance.
        * It'll dispatch the create action on the attendance module.
        */
-      createBranch () {
+      createAttendance () {
         if (this.user.selected !== null && this.branch.selected !== null) {
           this.attendance.userId = this.user.selected.id
           this.attendance.branchId = this.branch.selected.id

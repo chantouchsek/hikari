@@ -43,6 +43,14 @@ const addAlert = ({ commit }, payload) => {
   commit(types.ADD_ALERT, payload)
 }
 
+const disabledChat = ({ commit }) => {
+  commit(types.DISABLED_CHAT)
+}
+
+const enabledChat = ({ commit }) => {
+  commit(types.ENABLED_CHAT)
+}
+
 /**
  * Action fired to remove an alert.
  *
@@ -58,5 +66,7 @@ export default {
   showDrawer,
   hideDrawer,
   addAlert,
-  removeAlert
+  removeAlert,
+  disabledChat,
+  enabledChat
 }

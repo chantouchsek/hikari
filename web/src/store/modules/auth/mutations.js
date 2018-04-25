@@ -1,15 +1,16 @@
 /* ============
- * Artist Mutations
+ * Auth Mutations
  * ============
  *
- * The mutations available for the artist module.
+ * The mutations available for the auth module.
  */
 
 import Vue from 'vue'
 import {
   CHECK,
   LOGIN,
-  LOGOUT
+  LOGOUT,
+  GETAUTH
 } from './mutation-types'
 
 export default {
@@ -26,12 +27,22 @@ export default {
   },
 
   /**
+   * Mutation to update the store with the fetched user.
+   *
+   * @param {Object} state      The current state of the user.
+   * @param {Object} user The fetched user.
+   */
+  [GETAUTH] (state, user) {
+    state.user = user
+  },
+
+  /**
    * Mutation to log the user in.
    *
    * @param {Object} state       The current state of the store.
    * @param {String} accessToken The access token.
    */
-  [LOGIN] (state, {accessToken}) {
+  [LOGIN] (state, { accessToken }) {
     state.authenticated = true
     localStorage.setItem('access_token', accessToken)
     Vue.$http.defaults.headers.common.Authorization = `Bearer ${accessToken}`

@@ -51,7 +51,6 @@
                 :sort-desc.sync="sortDesc"
                 @filtered="onFiltered"
                 :filter="query"
-                :busy="true"
               >
                 <template slot="status" slot-scope="row">
                   {{ row.item.status ? 'Active' : 'InActive' }}

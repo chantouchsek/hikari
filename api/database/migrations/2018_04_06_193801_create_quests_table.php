@@ -20,6 +20,7 @@ class CreateQuestsTable extends Migration
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->boolean('status')->default(false);
+            $table->longText('description')->nullable();
             $table->timestamps();
         });
     }

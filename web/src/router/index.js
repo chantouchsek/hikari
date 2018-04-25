@@ -60,10 +60,6 @@ import StaffsIndex from '@/views/staffs/Index'
 import StaffsEdit from '@/views/staffs/Edit'
 import StaffsCreate from '@/views/staffs/Create'
 
-import StoresIndex from '@/views/stores/Index'
-import StoresEdit from '@/views/stores/Edit'
-import StoresCreate from '@/views/stores/Create'
-
 import TimeCardsIndex from '@/views/timecards/Index'
 import TimeCardsEdit from '@/views/timecards/Edit'
 import TimeCardsCreate from '@/views/timecards/Create'
@@ -72,9 +68,13 @@ import QuestsIndex from '@/views/quests/Index'
 import QuestsEdit from '@/views/quests/Edit'
 import QuestsCreate from '@/views/quests/Create'
 
+import AlarmsIndex from '@/views/alarms/Index'
+import AlarmsEdit from '@/views/alarms/Edit'
+import AlarmsCreate from '@/views/alarms/Create'
+
 import BranchIndex from '@/views/branches/Index'
-import BranchEdit from '@/views/branches/Edit'
 import BranchCreate from '@/views/branches/Create'
+import BranchEdit from '@/views/branches/Edit'
 
 import AttendancesIndex from '@/views/attendances/Index'
 import AttendancesEdit from '@/views/attendances/Edit'
@@ -91,7 +91,16 @@ import SchedulePostEdit from '@/views/scheduleposts/Edit'
 import SchedulePostCreate from '@/views/scheduleposts/Create'
 import DraftPostIndex from '@/views/scheduleposts/DraftPost'
 
+// Chat commponents
 import ChatIndex from '@/views/chats/Index'
+import GroupIndex from '@/views/chats/groups/Index'
+import GroupCreate from '@/views/chats/groups/Create'
+import GroupEdit from '@/views/chats/groups/Edit'
+
+import ChannelIndex from '@/views/chats/channels/Index'
+import ChannelCreate from '@/views/chats/channels/Create'
+import ChannelEdit from '@/views/chats/channels/Edit'
+import ChannelShow from '@/views/chats/channels/Show'
 
 export default [
   {
@@ -131,34 +140,6 @@ export default [
             path: '/staffs/create',
             name: 'staffs.create',
             component: StaffsCreate
-          }
-        ]
-      },
-      {
-        path: '/stores',
-        redirect: '/stores',
-        name: 'Store',
-        component: {
-          render (c) {
-            return c('router-view')
-          }
-        },
-        children: [
-          {
-            path: '/stores',
-            name: 'stores.index',
-            component: StoresIndex
-          },
-          {
-            path: '/stores/:storeId/edit',
-            name: 'stores.show',
-            component: StoresEdit,
-            props: true
-          },
-          {
-            path: '/stores/create',
-            name: 'stores.create',
-            component: StoresCreate
           }
         ]
       },
@@ -206,15 +187,43 @@ export default [
             component: QuestsIndex
           },
           {
+            path: '/quests/create',
+            name: 'quests.create',
+            component: QuestsCreate
+          },
+          {
             path: '/quests/:questId/edit',
             name: 'quests.show',
             component: QuestsEdit,
             props: true
+          }
+        ]
+      },
+      {
+        path: '/alarms',
+        redirect: '/alarms',
+        name: 'Alarms',
+        component: {
+          render (c) {
+            return c('router-view')
+          }
+        },
+        children: [
+          {
+            path: '/alarms',
+            name: 'alarms.index',
+            component: AlarmsIndex
           },
           {
-            path: '/quests/create',
-            name: 'quests.create',
-            component: QuestsCreate
+            path: '/alarms/create',
+            name: 'alarms.create',
+            component: AlarmsCreate
+          },
+          {
+            path: '/alarms/:alarmId/edit',
+            name: 'alarms.show',
+            component: AlarmsEdit,
+            props: true
           }
         ]
       },
@@ -234,15 +243,21 @@ export default [
             component: BranchIndex
           },
           {
-            path: '/branches/:branchId/edit',
+            path: '/branches/create',
+            name: 'branches.create',
+            component: BranchCreate
+          },
+          {
+            path: '/branches/:branchId',
             name: 'branches.show',
             component: BranchEdit,
             props: true
           },
           {
-            path: '/branches/create',
-            name: 'branches.create',
-            component: BranchCreate
+            path: '/branches/:branchId/edit',
+            name: 'branches.edit',
+            component: BranchEdit,
+            props: true
           }
         ]
       },
@@ -262,6 +277,11 @@ export default [
             component: AttendancesIndex
           },
           {
+            path: '/attendances/create',
+            name: 'attendances.create',
+            component: AttendancesCreate
+          },
+          {
             path: '/attendances/:attendanceId',
             name: 'attendances.show',
             component: AttendancesShow,
@@ -272,11 +292,6 @@ export default [
             name: 'attendances.edit',
             component: AttendancesEdit,
             props: true
-          },
-          {
-            path: '/attendances/create',
-            name: 'attendances.create',
-            component: AttendancesCreate
           }
         ]
       },
@@ -296,6 +311,11 @@ export default [
             component: DailyReportIndex
           },
           {
+            path: '/dailyreports/create',
+            name: 'dailyreports.create',
+            component: DailyReportCreate
+          },
+          {
             path: '/dailyreports/:dailyreportId',
             name: 'dailyreports.show',
             component: DailyReportShow,
@@ -306,11 +326,6 @@ export default [
             name: 'dailyreports.edit',
             component: DailyReportEdit,
             props: true
-          },
-          {
-            path: '/dailyreports/create',
-            name: 'dailyreports.create',
-            component: DailyReportCreate
           }
         ]
       },
@@ -330,12 +345,6 @@ export default [
             component: SchedulePostIndex
           },
           {
-            path: '/posts/schedule/:scheduleId/edit',
-            name: 'schedule.edit',
-            component: SchedulePostEdit,
-            props: true
-          },
-          {
             path: '/posts/create',
             name: 'posts.create',
             component: SchedulePostCreate
@@ -344,6 +353,12 @@ export default [
             path: '/posts/draft',
             name: 'draft.index',
             component: DraftPostIndex
+          },
+          {
+            path: '/posts/schedule/:scheduleId/edit',
+            name: 'schedule.edit',
+            component: SchedulePostEdit,
+            props: true
           }
         ]
       },
@@ -361,6 +376,44 @@ export default [
             path: '/chats',
             name: 'Chats',
             component: ChatIndex
+          },
+          {
+            path: '/groups',
+            name: 'groups.index',
+            component: GroupIndex
+          },
+          {
+            path: '/groups/create',
+            name: 'groups.create',
+            component: GroupCreate
+          },
+          {
+            path: '/groups/:groupId/edit',
+            name: 'groups.show',
+            component: GroupEdit,
+            props: true
+          },
+          {
+            path: '/channels',
+            name: 'channels.index',
+            component: ChannelIndex
+          },
+          {
+            path: '/channels/create',
+            name: 'channels.create',
+            component: ChannelCreate
+          },
+          {
+            path: '/channels/:channelId/edit',
+            name: 'channels.edit',
+            component: ChannelEdit,
+            props: true
+          },
+          {
+            path: '/channels/:channelId',
+            name: 'channels.show',
+            component: ChannelShow,
+            props: true
           }
         ]
       },

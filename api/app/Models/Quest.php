@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Quest extends Model
 {
     protected $fillable = [
-        'name', 'quest_type', 'user_id', 'date_term', 'status'
+        'name', 'quest_type', 'date_term', 'status', 'description'
     ];
 
     protected $dates = [

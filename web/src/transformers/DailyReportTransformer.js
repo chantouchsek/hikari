@@ -18,18 +18,18 @@ class DailyReportTransformer extends Transformer {
     return new Quest({
       id: dailyreport.id,
       sales: dailyreport.sales,
-      numberCustomers: dailyreport.number_customers,
+      totalGuest: dailyreport.total_guest,
       userId: dailyreport.user_id,
       branchId: dailyreport.branch_id,
-      customerType: dailyreport.customer_type,
+      date: dailyreport.date,
+      guestType: dailyreport.guest_type,
       cost: dailyreport.cost,
       questA: dailyreport.quest_a,
       questB: dailyreport.quest_b,
-      notes: dailyreport.notes,
-      date: dailyreport.date,
-      totalPrice: dailyreport.total_price,
-      pricePerCustomer: dailyreport.price_per_customer,
-      roughInterest: dailyreport.rough_interest,
+      questC: dailyreport.quest_c,
+      comments: dailyreport.comments,
+      unitSale: dailyreport.unit_sale,
+      crossProfit: dailyreport.cross_profit,
       branch: dailyreport.branch,
       user: dailyreport.user
     })
@@ -44,18 +44,18 @@ class DailyReportTransformer extends Transformer {
     return {
       id: dailyreport.id,
       sales: dailyreport.sales,
-      number_customers: dailyreport.numberCustomers,
+      total_guest: dailyreport.totalGuest,
       user_id: dailyreport.userId,
       branch_id: dailyreport.branchId,
-      customer_type: dailyreport.customerType,
+      guest_type: dailyreport.guestType,
       cost: dailyreport.cost,
       quest_a: dailyreport.questA,
       quest_b: dailyreport.questB,
-      notes: dailyreport.notes,
+      quest_c: dailyreport.questC,
+      comments: dailyreport.comments,
       date: dailyreport.date,
-      total_price: dailyreport.totalPrice,
-      price_per_customer: dailyreport.pricePerCustomer,
-      rough_interest: dailyreport.roughInterest
+      unit_sale: dailyreport.unitSale,
+      cross_profit: dailyreport.crossProfit
     }
   }
 }

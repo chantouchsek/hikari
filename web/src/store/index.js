@@ -15,7 +15,6 @@ import auth from './modules/auth'
 import user from './modules/user'
 import artist from './modules/artist'
 import application from './modules/application'
-import store from './modules/store'
 import timecard from './modules/timecard'
 import quest from './modules/quest'
 import branch from './modules/branch'
@@ -24,6 +23,10 @@ import dailyreport from './modules/dailyreport'
 import post from './modules/post'
 import draftpost from './modules/draftpost'
 import chat from './modules/chat'
+import group from './modules/group'
+import channel from './modules/channel'
+import conversation from './modules/conversation'
+import alarm from './modules/alarm'
 
 Vue.use(Vuex)
 
@@ -38,7 +41,6 @@ export default new Vuex.Store({
     user,
     application,
     artist,
-    store,
     timecard,
     quest,
     branch,
@@ -46,7 +48,11 @@ export default new Vuex.Store({
     dailyreport,
     post,
     draftpost,
-    chat
+    chat,
+    group,
+    channel,
+    conversation,
+    alarm
   },
 
   /**

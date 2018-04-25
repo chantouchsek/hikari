@@ -1,6 +1,18 @@
 <template>
   <div class="app flex-row align-items-center">
     <div class="container">
+      <b-row class="justify-content-center">
+        <b-col md="8">
+          <b-alert v-for="alert, index in application.alerts"
+                   :variant="alert.type"
+                   dismissible
+                   show
+                   :key="index"
+                   @dismissed="removeAlert(alert)">
+            {{ alert.message }}
+          </b-alert>
+        </b-col>
+      </b-row>
       <b-form @submit.prevent="login">
         <b-row class="justify-content-center">
           <b-col md="8">
@@ -50,6 +62,8 @@
 </template>
 
 <script>
+  import {mapState} from 'vuex'
+
   export default {
     /**
      * The name of the page
@@ -66,8 +80,17 @@
         user: {
           username: null,
           password: null
-        }
+        },
+        dismissSecs: 10,
+        dismissCountDown: 0,
+        showDismissibleAlert: false
       }
+    },
+
+    computed: {
+      ...mapState('application', {
+        application: state => state
+      })
     },
 
     /**
@@ -81,6 +104,18 @@
 
       login () {
         this.$store.dispatch('auth/login', this.user)
+      },
+
+      removeAlert (alert) {
+        this.$store.dispatch('application/removeAlert', alert)
+      },
+
+      countDownChanged (dismissCountDown) {
+        this.dismissCountDown = dismissCountDown
+      },
+
+      showAlert () {
+        this.dismissCountDown = this.dismissSecs
       }
     }
   }

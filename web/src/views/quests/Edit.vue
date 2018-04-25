@@ -17,34 +17,59 @@
                             placeholder="Enter quest name">
               </b-form-input>
             </b-form-group>
-            <!--<b-form-group id="labelStore"-->
-            <!--label="Store:"-->
-            <!--label-for="store">-->
-            <!--<v-select @search="fetchStores" v-model="store.selected" :options="store.items"></v-select>-->
-            <!--</b-form-group>-->
-            <b-form-group id="labelUser"
-                          label="Staff ID:"
-                          label-for="user">
-              <v-select v-model="user.selected" @search="fetchUsers" :options="user.items"></v-select>
-            </b-form-group>
             <b-form-group id="labelQuestType"
                           label="Quest Type:"
                           label-for="quest_type">
               <b-form-select v-model="quest.questType"
-                             :options="options"
+                             :options="questType"
                              class="mb-3"
                              id="quest_type"
               ></b-form-select>
             </b-form-group>
-            <b-form-group id="labelDateTerm"
-                          label="Date Term:"
-                          label-for="date_term">
-              <b-form-input id="date_term"
-                            type="text"
-                            v-model="quest.dateTerm"
-                            required
-                            placeholder="Enter staff date term">
-              </b-form-input>
+            <b-form-group id="labelUser"
+                          label="Staff ID:"
+                          label-for="user">
+              <treeselect
+                :multiple="true"
+                :options="user.items"
+                search-nested
+                value-consists-of="LEAF_PRIORITY"
+                v-model="user.selected"
+              />
+            </b-form-group>
+            <b-row>
+              <b-col md="6">
+                <b-form-group id="labelStartDate"
+                              label="Start Date:"
+                              label-for="start_date">
+                  <b-form-input id="start_date"
+                                type="text"
+                                v-model="quest.dateTerm"
+                  >
+                  </b-form-input>
+                </b-form-group>
+              </b-col>
+              <b-col md="6">
+                <b-form-group id="labelEndDate"
+                              label="End Date:"
+                              label-for="end_date">
+                  <b-form-input id="end_date"
+                                type="text"
+                                v-model="quest.dateTerm"
+                  >
+                  </b-form-input>
+                </b-form-group>
+              </b-col>
+            </b-row>
+            <b-form-group id="labelDescription"
+                          label="Description:"
+                          label-for="user">
+              <b-form-textarea id="description"
+                               v-model="quest.description"
+                               placeholder="Enter something"
+                               :rows="10"
+                               :max-rows="15">
+              </b-form-textarea>
             </b-form-group>
             <b-form-group id="labelStatus"
                           label="Status:"
@@ -53,7 +78,7 @@
                                v-model="quest.status"
                                value="1"
                                unchecked-value="0">
-                Status
+                Active
               </b-form-checkbox>
             </b-form-group>
             <b-button type="submit" variant="primary">Submit</b-button>
@@ -67,17 +92,19 @@
 </template>
 
 <script>
+  import '@riophae/vue-treeselect/dist/vue-treeselect.min.css'
   import debounce from 'lodash.debounce'
   import QuestProxy from '@/proxies/QuestProxy'
   import QuestTransformer from '@/transformers/QuestTransformer'
   import UserProxy from '@/proxies/UserProxy'
-  import StoreProxy from '@/proxies/StoreProxy'
+  import BranchProxy from '@/proxies/BranchProxy'
+  import Treeselect from '@riophae/vue-treeselect'
 
   import VSelect from 'vue-select'
 
   const proxy = new QuestProxy()
   const userProxy = new UserProxy()
-  const storeProxy = new StoreProxy()
+  const branchProxy = new BranchProxy()
 
   export default {
     name: 'quest-edit',
@@ -96,22 +123,20 @@
     },
     data () {
       return {
-        quest: null,
+        quest: {},
         show: false,
         user: {
           items: [],
           selected: null
         },
-        store: {
+        branch: {
           items: [],
           selected: null
         },
-        options: [
-          { value: null, text: 'Please select some item' },
-          { value: '0', text: 'Quest Type 1' },
-          { value: '1', text: 'Quest Type 2' },
-          { value: '2', text: 'Quest Type 3' },
-          { value: '3', text: 'Quest Type 4' }
+        questType: [
+          { value: '', text: 'Please select some item' },
+          { value: '0', text: 'Number quest' },
+          { value: '1', text: 'Action quest' }
         ]
       }
     },
@@ -197,15 +222,15 @@
       },
 
       /**
-       * Debounced method to fetch the stores using a given query.
+       * Debounced method to fetch the branches using a given query.
        */
       fetchStores: debounce(function (query) {
-        storeProxy.setParameter('q', query)
+        branchProxy.setParameter('q', query)
           .all()
           .then((items) => {
-            this.store.items = items.data.map(store => ({
-              id: store.id,
-              label: store.name
+            this.branch.items = items.data.map(branch => ({
+              id: branch.id,
+              label: branch.name
             }))
           })
       }, 500)
@@ -228,7 +253,8 @@
       this.fetchQuest(this.questId)
     },
     components: {
-      VSelect
+      VSelect,
+      Treeselect
     }
   }
 </script>

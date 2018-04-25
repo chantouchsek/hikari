@@ -19,7 +19,8 @@ class AuthTransformer extends Transformer {
       tokenType: auth.token_type,
       expiresIn: auth.expires_in,
       accessToken: auth.access_token,
-      refreshToken: auth.refresh_token
+      refreshToken: auth.refresh_token,
+      user: auth.user
     })
   }
 

@@ -51,7 +51,6 @@
                 :sort-desc.sync="sortDesc"
                 @filtered="onFiltered"
                 :filter="query"
-                busy
               >
                 <template slot="registered" slot-scope="row">
                   {{ row.item.registered }}
@@ -125,8 +124,12 @@
         fields: [
           { key: 'staffId', label: 'Staff ID', sortable: true },
           { key: 'name', label: 'Name', sortable: true },
-          { key: 'store', label: 'Store', sortable: true },
-          { key: 'registered', label: 'Registered at', sortable: true },
+          { key: 'branch', label: 'Branch', sortable: true },
+          { key: 'hourlyRate', label: 'Hourly Rate', sortable: true },
+          { key: 'startDate', label: 'Start Date', sortable: true },
+          { key: 'emailAddress', label: 'Email Address', sortable: true },
+          { key: 'telephone', label: 'Tel', sortable: true },
+          { key: 'status', label: 'Status', sortable: true },
           { key: 'actions', label: 'Actions' }
         ],
         query: null,

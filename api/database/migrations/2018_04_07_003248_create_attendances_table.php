@@ -21,13 +21,12 @@ class CreateAttendancesTable extends Migration
       $table->dateTime('leave_time')->nullable();
       $table->dateTime('break_start')->nullable();
       $table->dateTime('break_finish')->nullable();
-      $table->integer('type_attendance')->nullable();
-      $table->string('hourly_rate')->nullable();
       $table->boolean('meal')->nullable();
       $table->boolean('late')->nullable();
       $table->boolean('early_leave')->nullable();
       $table->boolean('over_time')->nullable();
       $table->tinyInteger('status')->default(0);
+      $table->text('total_working_time')->nullable();
       $table->text('notes')->nullable();
       $table->timestamps();
 

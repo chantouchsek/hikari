@@ -88,8 +88,8 @@ class BaseProxy {
         .catch(({ response }) => {
           if (response) {
             reject(response.data)
+            store.dispatch('application/disabledChat')
           } else {
-            console.log(response)
             reject(new Error('Something went wrong! Please check your connection.'))
             store.dispatch('application/addAlert', {
               type: 'danger',

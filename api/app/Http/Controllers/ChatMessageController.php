@@ -47,8 +47,8 @@ class ChatMessageController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-         * @return \Illuminate\Http\JsonResponse
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
@@ -58,7 +58,7 @@ class ChatMessageController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\ChatMessage  $chatMessage
+     * @param  \App\Models\ChatMessage $chatMessage
      * @return \Illuminate\Http\JsonResponse
      */
     public function show(ChatMessage $chatMessage)
@@ -69,8 +69,8 @@ class ChatMessageController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ChatMessage  $chatMessage
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Models\ChatMessage $chatMessage
      * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, ChatMessage $chatMessage)
@@ -81,7 +81,7 @@ class ChatMessageController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ChatMessage  $chatMessage
+     * @param  \App\Models\ChatMessage $chatMessage
      * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(ChatMessage $chatMessage)

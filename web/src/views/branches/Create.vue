@@ -14,7 +14,8 @@
                               label-for="name">
                   <div class="content-image" @click="openBranchImage"
                        :style="{ 'background-image': 'url(' + branch.thumbnailId + ')' }">
-                    <input type="file" name="branch_image" style="display: none" id="branch_image" @change="onFileChange">
+                    <input type="file" name="branch_image" style="display: none" id="branch_image"
+                           @change="onFileChange">
                     <i class="fa fa-plus-circle custom-font"></i>
                   </div>
                 </b-form-group>

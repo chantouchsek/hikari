@@ -8,6 +8,7 @@
 export default {
   drawerActive: false,
   alerts: [],
+  isJoined: true,
   configDate: {
     format: 'YYYY-MM-DD',
     useCurrent: true,

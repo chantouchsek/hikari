@@ -1,8 +1,8 @@
 /* ============
- * Artist Actions
+   * Auth Actions
  * ============
  *
- * The actions available for the artist module.
+ * The actions available for the auth module.
  */
 
 import Vue from 'vue'
@@ -10,16 +10,34 @@ import * as types from './mutation-types'
 import store from '@/store'
 import Proxy from '@/proxies/AuthProxy'
 import AuthTransformer from '@/transformers/AuthTransformer'
+import GetAuthProxy from '@/proxies/GetAuthProxy'
 
 const proxy = new Proxy()
+const getAuthProxy = new GetAuthProxy()
 
 /**
  * Action which will check the authentication.
  *
  * @param {function} commit Commit function to update the store.
  */
-export const check = ({commit}) => {
+export const check = ({ commit }) => {
   commit(types.CHECK)
+}
+
+/**
+ * Action fired when all branches will be fetched.
+ *
+ * @param {function} commit Commit function to update the store.
+ * @param {function} fn Callback to edit the parameters on the proxy.
+ */
+const getAuth = ({ commit }, fn = null) => {
+  if (typeof fn === 'function') {
+    fn(getAuthProxy)
+  }
+  getAuthProxy.all()
+    .then((response) => {
+      commit(types.GETAUTH, response)
+    })
 }
 
 /**
@@ -28,7 +46,7 @@ export const check = ({commit}) => {
  * @param {function} commit  Commit function to update the store.
  * @param {Object}   payload The payload.
  */
-export const login = ({commit}, payload) => {
+export const login = ({ commit }, payload) => {
   proxy.login(payload)
     .then((response) => {
       commit(types.LOGIN, AuthTransformer.fetch(response))
@@ -37,15 +55,15 @@ export const login = ({commit}, payload) => {
         type: 'success',
         message: 'Login successful!'
       })
-
+      store.dispatch('auth/getAuth')
       Vue.router.push({
         name: 'Home'
       })
     })
-    .catch(() => {
+    .catch((error) => {
       store.dispatch('application/addAlert', {
         type: 'danger',
-        message: 'Could not login'
+        message: error.message
       })
     })
 }
@@ -55,7 +73,7 @@ export const login = ({commit}, payload) => {
  *
  * @param {function} commit Commit function to update the store.
  */
-export const logout = ({commit}) => {
+export const logout = ({ commit }) => {
   commit(types.LOGOUT)
 
   store.dispatch('application/addAlert', {
@@ -71,5 +89,6 @@ export const logout = ({commit}) => {
 export default {
   check,
   login,
-  logout
+  logout,
+  getAuth
 }

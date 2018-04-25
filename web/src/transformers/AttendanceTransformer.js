@@ -6,19 +6,18 @@
  */
 
 import Transformer from './BaseTransformer'
-import Quest from '@/models/Branch'
+import Attendance from '@/models/Attendance'
 
 class AttendanceTransformer extends Transformer {
   /**
    * Method used to transform a fetched attendance.
    *
-   * @returns {Quest} a attendance model.
+   * @returns {Attendance} a attendance model.
    */
   static fetch (attendance) {
-    return new Quest({
+    return new Attendance({
       id: attendance.id,
       reportedAt: attendance.reported_at,
-      typeAttendance: attendance.type_attendance,
       meal: attendance.meal,
       overTime: attendance.over_time,
       earlyLeave: attendance.early_leave,
@@ -26,7 +25,6 @@ class AttendanceTransformer extends Transformer {
       userId: attendance.user_id,
       user: attendance.user,
       branch: attendance.branch,
-      hourlyRate: attendance.hourly_rate,
       startTime: attendance.start_time,
       startTimer: attendance.start_timer,
       leaveTime: attendance.leave_time,
@@ -47,14 +45,12 @@ class AttendanceTransformer extends Transformer {
   static send (attendance) {
     return {
       id: attendance.id,
-      type_attendance: attendance.typeAttendance,
       meal: attendance.meal,
       over_time: attendance.overTime,
       early_leave: attendance.earlyLeave,
       late: attendance.late,
       user_id: attendance.userId,
       branch_id: attendance.branchId,
-      hourly_rate: attendance.hourlyRate,
       start_time: attendance.startTime + attendance.startTimer,
       leave_time: attendance.leaveTime + attendance.leaveTimer,
       break_start: attendance.breakStart + attendance.breakStartTime,

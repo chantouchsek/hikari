@@ -13,7 +13,7 @@ abstract class BaseTransformer
      *
      * @return Collection The transformed collection.
      */
-    public function transformCollection(Collection $items) : Collection
+    public function transformCollection(Collection $items): Collection
     {
         return $items->map(function ($item) {
             return $this->transform($item);
@@ -27,5 +27,5 @@ abstract class BaseTransformer
      *
      * @return array The transformed item.
      */
-    abstract public function transform($item) : array;
+    abstract public function transform($item): array;
 }
